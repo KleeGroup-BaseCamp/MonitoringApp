@@ -1,4 +1,6 @@
-# Brunch with Marionette
+# HomeAgain : MonitoringApp
+This application is a monitoring application will use the HomeAgain API in order to have a monitoring.
+## This application use Brunch with Marionette
 This is a simple coffeescript based skeleton for [Brunch](http://brunch.io/) which utilizes [MarionetteJS](http://marionettejs.com/) and Bootstrap 3.
 
 Main features are [CoffeeScript](http://coffeescript.org/),
@@ -7,8 +9,13 @@ Main features are [CoffeeScript](http://coffeescript.org/),
 [Bootstrap 3](http://getbootstrap.com/).
 
 ## Getting started
-* Create new project via executing `brunch new <project name> --skeleton gh:vip32/brunch-with-marionette` option for the command.
+* Install node js and npm
+* Install bower ```npm install -g bower```
+* Install dependencies of bower :  ```bower install``
+* Install brunch ```npm install -g brunch``
+* Install node dependencies ```npm install```
 * Build the project with `brunch b` or `brunch w`.
+* Launch the server and build brunch w --server
 * Open the `public/` dir to see the result.
 * Write your code in `app/`.
 
