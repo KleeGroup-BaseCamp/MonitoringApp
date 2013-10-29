@@ -23,6 +23,7 @@ module.exports = class Router extends Backbone.Router
     'contact': 'contact'
     'signin': 'signin'
     'dashboard': 'dashboard'
+    'temperature' : 'temperature'
   home: =>
     view = new HomeView()
     application.layout.content.show(view)
@@ -63,6 +64,7 @@ module.exports = class Router extends Backbone.Router
           time: moment().format('MMMM Do YYYY, h:mm:ss a')
       )
 
+
   dashboard: =>
     temperatureModel1 = new TemperatureModel
       room : "Bathroom"
@@ -91,3 +93,26 @@ module.exports = class Router extends Backbone.Router
           name: 'Dashboard'
           time: moment().format('MMMM Do YYYY, h:mm:ss a')
       )
+
+  temperature: =>
+    
+    sensorCollection = new TemperatureCollection 
+    sensorCollection.fetch(
+        success : ->
+          filteredCollection = new TemperatureCollection(
+            sensorCollection.filter(
+              (sensor)->
+                sensor.get('model') == 'temperature'
+            )
+          )
+          view = new TemperatureCollectionView(collection : filteredCollection)
+          application.layout.content.show(view)
+          application.layout.footer.show(
+            new FooterView
+              model: new Backbone.Model
+              name: 'temperature'
+              time: moment().format('MMMM Do YYYY, h:mm:ss a')
+          )
+    )
+
+>>>>>>> Added : connect Backbone model's to the REST API and render data
