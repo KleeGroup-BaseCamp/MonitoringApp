@@ -4,22 +4,25 @@ HomeView = require 'views/home-view'
 AboutView = require 'views/about-view'
 ContactView = require 'views/contact-view'
 SigninView = require 'views/signin-view'
+
 TemperatureView = require 'views/temperature-view'
-
 TemperatureCollectionView = require 'views/temperature-collectionview'
-
 TemperatureModel = require 'models/temperature-model'
-
 TemperatureCollection = require 'models/temperature-collection'
+
+DoorView = require 'views/door-view'
+DoorCollectionView = require 'views/door-collectionview'
+DoorModel = require 'models/door-model'
+DoorCollection = require 'models/door-collection'
 
 module.exports = class Router extends Backbone.Router
 
 	routes:
-    '': 'home'
+    '': 'dashboard'
     'about': 'about'
     'contact': 'contact'
     'signin': 'signin'
-    'temperature': 'temperature'
+    'dashboard': 'dashboard'
   home: =>
     view = new HomeView()
     application.layout.content.show(view)
@@ -60,7 +63,7 @@ module.exports = class Router extends Backbone.Router
           time: moment().format('MMMM Do YYYY, h:mm:ss a')
       )
 
-  temperature: =>
+  dashboard: =>
     temperatureModel1 = new TemperatureModel
       room : "Bathroom"
       temperature : "27°C"
@@ -68,11 +71,23 @@ module.exports = class Router extends Backbone.Router
       room : "Bedroom"
       temperature : "23°C"
     temperatureCollection = new TemperatureCollection [temperatureModel1, temperatureModel2]
-    view = new TemperatureCollectionView(collection :   temperatureCollection)
-    application.layout.content.show(view)
+    view = new TemperatureCollectionView(collection : temperatureCollection)
+    application.layout.contentTemperature.show(view)
+
+    doorModel1 = new DoorModel
+      room : "Noé's Bedroom"
+      status : "Opened"
+    doorModel2 = new DoorModel
+      room : "Julian's Bedroom"
+      status : "Closed"
+    doorCollection = new DoorCollection [doorModel1, doorModel2]
+    view = new DoorCollectionView(collection : doorCollection)
+    application.layout.contentDoor.show(view)
+
+
     application.layout.footer.show(
       new FooterView
         model: new Backbone.Model
-          name: 'temperature'
+          name: 'Dashboard'
           time: moment().format('MMMM Do YYYY, h:mm:ss a')
       )
