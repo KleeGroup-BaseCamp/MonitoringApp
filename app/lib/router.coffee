@@ -4,7 +4,7 @@ HomeView = require 'views/home-view'
 AboutView = require 'views/about-view'
 ContactView = require 'views/contact-view'
 SigninView = require 'views/signin-view'
-
+#async = require 'async'
 TemperatureView = require 'views/temperature-view'
 TemperatureCollectionView = require 'views/temperature-collectionview'
 TemperatureModel = require 'models/temperature-model'
@@ -66,6 +66,40 @@ module.exports = class Router extends Backbone.Router
 
 
   dashboard: =>
+    sensorCollection = new TemperatureCollection 
+    sensorModels = [ "temperature", "door"]
+
+    sensorModels.forEach( 
+      (sensorModel, callback) ->
+        console.log(sensorModel)
+        sensorCollection.fetch(
+          success : ->
+            
+            
+            
+            if(sensorModel == 'temperature')
+              filteredCollection = new TemperatureCollection(
+                sensorCollection.filter(
+                  (sensor)->
+                    sensor.get('model') == sensorModel
+                )
+              )
+              view = new TemperatureCollectionView(collection : filteredCollection)
+              application.layout.contentTemperature.show(view)
+            else
+              filteredCollection = new DoorCollection(
+                sensorCollection.filter(
+                  (sensor)->
+                    sensor.get('model') == sensorModel
+                )
+              )
+              view = new DoorCollectionView(collection : filteredCollection)
+              application.layout.contentDoor.show(view)
+        )
+
+    )
+
+   """ 
     temperatureModel1 = new TemperatureModel
       room : "Bathroom"
       temperature : "27°C"
@@ -93,7 +127,7 @@ module.exports = class Router extends Backbone.Router
           name: 'Dashboard'
           time: moment().format('MMMM Do YYYY, h:mm:ss a')
       )
-
+"""
   temperature: =>
     
     sensorCollection = new TemperatureCollection 
@@ -114,5 +148,3 @@ module.exports = class Router extends Backbone.Router
               time: moment().format('MMMM Do YYYY, h:mm:ss a')
           )
     )
-
->>>>>>> Added : connect Backbone model's to the REST API and render data
