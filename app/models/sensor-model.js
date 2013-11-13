@@ -1,7 +1,7 @@
-module.exports = DoorModel = Backbone.Model.extend({
+module.exports = SensorModel = Backbone.Model.extend({
+	idAttribute: 'sensor_id',
 	defaults : {
 		room : 'Kitchen',
 	},
-		
-});
 	
+});
