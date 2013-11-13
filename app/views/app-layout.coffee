@@ -6,7 +6,5 @@ module.exports = class AppLayout extends Backbone.Marionette.Layout
 
   regions:
     content: "#content"
-    contentTemperature: "#contentTemperature"
-    contentDoor: "#contentDoor"
     footer: "#footer"
 

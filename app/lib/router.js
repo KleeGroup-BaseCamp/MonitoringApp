@@ -33,40 +33,16 @@ module.exports = Router = Backbone.Router.extend({
 
   dashboard: function(){
     sensorCollection = new SensorCollection();
-    sensorModels = [ "temperature", "door"];
 
-    sensorModels.forEach(
-      function(sensorModel, callback){
-        sensorCollection.fetch({
-          success : function(){
-            if(sensorModel == 'temperature'){
-              filteredCollection = new SensorCollection(
-                sensorCollection.filter(
-                  function(sensor){
-                    return (sensor.get('model') == sensorModel);
-                  }
-                )
-              );
-            
-              view = new SensorCollectionView({collection : filteredCollection});
-              application.layout.contentTemperature.show(view);
-            }
-            
-            else {
-              filteredCollection = new SensorCollection(
-                sensorCollection.filter(
-                  function(sensor){
-                    return (sensor.get('model') == sensorModel);
-                  }
-                )
-              );
-
-              view = new SensorCollectionView({collection : filteredCollection});
-              application.layout.contentDoor.show(view);
-            }
-        }
-      });
+    sensorCollection.fetch({
+      success : function(){
+        view = new SensorCollectionView({collection : sensorCollection});
+        application.layout.content.show(view);
+      },
+      error : function(err){
+        console.log(err);
+      }
     });
-    
   }
+
 });
