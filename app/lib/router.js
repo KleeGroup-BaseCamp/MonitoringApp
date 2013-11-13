@@ -32,7 +32,7 @@ module.exports = Router = Backbone.Router.extend({
   },
 
   dashboard: function(){
-
+    sensorCollection = new SensorCollection();
     sensorModels = [ "temperature", "door"];
 
     sensorModels.forEach(
