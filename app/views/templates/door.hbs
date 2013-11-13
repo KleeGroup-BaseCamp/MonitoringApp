@@ -1,7 +1,11 @@
 <div class="col-md-3">
   <div class="well text-center">
     <h2>{{room}}</h2>
-    <h2>{{data.value}}</h2>
+    {{#isOpened data.value }}
+    	<h2>Opened</h2>
+    {{else}}
+    	<h2>Closed</h2>
+    {{/isOpened}}
     <a href="#" id="refresh">Refresh</a>
   </div>
 </div>
