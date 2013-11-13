@@ -1,18 +1,16 @@
 application = require('application');
 
 SensorCollection = require('models/sensor-collection');
+RoomCollection = require('models/room-collection');
+
 SensorCollectionView = require('views/sensor-collectionview');
 RoomsCollectionView = require('views/rooms-collectionview');
-
-RoomCollection = require('models/room-collection');
 
 module.exports = Router = Backbone.Router.extend({
 
   routes : {
     '': 'dashboard',
-    'about': 'about',
-    'contact': 'contact',
-    'signin': 'signin',
+
     'dashboard': 'dashboard',
     'rooms' : 'rooms'
   },
@@ -35,7 +33,6 @@ module.exports = Router = Backbone.Router.extend({
 
   dashboard: function(){
 
-    sensorCollection = new TemperatureCollection();
     sensorModels = [ "temperature", "door"];
 
     sensorModels.forEach(

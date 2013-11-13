@@ -17,7 +17,7 @@ module.exports = RoomView = Backbone.Marionette.CompositeView.extend({
 		this.collection = new SensorCollection(this.model.get('sensors'));
 		console.log("Collection :" );
 		console.log(this.collection);
-		//console.log(this.collection);
+
 	}
  });
 	
