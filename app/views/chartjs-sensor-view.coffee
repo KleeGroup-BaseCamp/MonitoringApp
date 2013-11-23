@@ -1,12 +1,27 @@
 
 module.exports = class ChartJSSensorView extends Backbone.Marionette.ItemView
+
     id: 'chart-sensor-view',
     template: 'views/templates/chart-sensor'
     
+    fetch: ->
+        console.log @model
+        url =  'http://127.0.0.1:4000/sensor/' + 'TEMP_1' + '/all/'
+        $.get url, 
+            success: (data) ->
+                console.log data
+                #model.set('data', data.)
+            error : (error) ->
+                console.log "Fetch failed"
+        return
+
+    initialize: ->
+        this.fetch()
+                
+
+
     render : =>
         super
-        console.log("Test")
-        console.log(@$el.children("#chart-sensor"))
         `        var data = {
             labels : ["January","February","March","April","May","June","July"],
         datasets : [

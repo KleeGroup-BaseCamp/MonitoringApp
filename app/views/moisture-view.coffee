@@ -12,11 +12,13 @@ module.exports = class MoistureView extends Backbone.Marionette.ItemView
         this.model.fetch()
 
     render : =>
-        super
-        canvas = @$el.find(".canvas").get(0)
-        p = new Processing(canvas, @sketchProc);
-        p.width = canvas.width
-        p.moistureEnd= Math.round(@model.get("data").value)
+    
+        if(!@p)
+            super
+            canvas = @$el.find(".canvas").get(0)
+            @p = new Processing(canvas, @sketchProc);
+        
+        @p.moistureEnd= Math.round(@model.get("data").value)
     
     sketchProc: (p)->
         p.setup= ->

@@ -16,5 +16,7 @@ module.exports = SensorModel = Backbone.Model.extend({
 			this.fetch();
 
 		}
+		var model = this;
+		window.setInterval(function(){ model.fetch()}, 10000);
 	}
 });
