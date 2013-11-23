@@ -1,12 +1,12 @@
-
-<div class="col-sm-4 col-md-4">
-  <div class="well text-center">
-    <h2>{{room}}</h2>
-    {{#isOpened data.value }}
+<div class="col-sm-4 col-md-4 col-lg-4">
+	<div class="panel panel-primary">
+	  <div class="panel-heading text-center">{{name}}</div>
+	  <div class="panel-body text-center">
+	        {{#isOpened data.value }}
     	<h2>Opened</h2>
     {{else}}
     	<h2>Closed</h2>
     {{/isOpened}}
-    <a href="#" id="refresh">Refresh</a>
-  </div>
+	  </div>
+	</div>
 </div>

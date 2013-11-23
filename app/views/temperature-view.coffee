@@ -15,8 +15,11 @@ module.exports = class TemperatureView extends Backbone.Marionette.ItemView
         super
         canvas = @$el.find(".canvas").get(0)
         p = new Processing(canvas, @sketchProc);
+        p.width = @$el.width()
+       # console.log "Div width: " + @$el.find("div.col-lg-3").width()
         p.temperatureEnd= Math.round(@model.get("data").value)
-        p.width = canvas.width
+        
+        
         #p.temperature = @model.get("value")
 
     sketchProc: (p)->
@@ -26,13 +29,18 @@ module.exports = class TemperatureView extends Backbone.Marionette.ItemView
             
             @temperature = 0
             @temperatureEnd = 0
-            @width = 200
+            @width = 176
+            
             p.size @width, @width
             # Draw arc
             #  
             @drawArc(@temperature)
             
         p.draw=->
+
+            @width = jQuery("div.col-lg-4").width()
+            
+            p.size @width, @width
             if (@temperatureEnd != @temperature)
               if( @temperatureEnd > @temperature)
                 @temperature += 1
@@ -70,7 +78,4 @@ module.exports = class TemperatureView extends Backbone.Marionette.ItemView
             p.textSize 40
             p.textAlign p.CENTER, p.CENTER
             p.text @temperature.toString() + "°C", p.width/2, p.width/2
-            
-        p.mouseClicked= ->
-            @temperatureEnd = Math.round(Math.random()*40) + 10
-     
+

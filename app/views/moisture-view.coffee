@@ -29,6 +29,11 @@ module.exports = class MoistureView extends Backbone.Marionette.ItemView
             @drawArc(@moisture)
             
         p.draw= ->
+
+            @width = jQuery("div.col-lg-4").width()
+            
+            p.size @width, @width
+
             if (@moistureEnd != @moisture)
               if( @moistureEnd > @moisture)
                 @moisture += 1
@@ -46,13 +51,14 @@ module.exports = class MoistureView extends Backbone.Marionette.ItemView
             # Draw center cicle to hide part of the arc
             p.color c = p.color 37, 44, 153
             p.fill c
-            p.stroke 37, 44, 153
-            p.rect 0, 0, p.width/4, p.width
+            p.arc p.width/2, p.width/2, p.width*12/16, p.width*12/16 , -p.PI/2, (moisture/100)*12/8*p.PI
+            #p.stroke 37, 44, 153
+            #p.rect 0, 0, p.width/4, p.width
             
-            p.color c = p.color 245
+            p.color c = p.color 255
             p.fill c
-            p.stroke 37, 44, 153
-            p.rect 0, 0, p.width/4, p.width*((100-moisture)/100)
+            p.noStroke()
+            p.ellipse p.width/2, p.width/2, p.width*10/16, p.width*10/16
             
             # Write moisture
             p.color c = p.color  37, 44, 53
@@ -60,8 +66,7 @@ module.exports = class MoistureView extends Backbone.Marionette.ItemView
             p.textSize 40
             p.textAlign p.CENTER, p.CENTER
             p.text @moisture.toString() + "%", p.width/2, p.width/2
-            
-            
+       
         mouseClicked= ->
             @moistureEnd = Math.round(Math.random()*40) + 10
 
