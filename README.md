@@ -1,12 +1,6 @@
 # HomeAgain : MonitoringApp
 This application is a monitoring application will use the HomeAgain API in order to have a monitoring.
-## This application use Brunch with Marionette
-This is a simple coffeescript based skeleton for [Brunch](http://brunch.io/) which utilizes [MarionetteJS](http://marionettejs.com/) and Bootstrap 3.
 
-Main features are [CoffeeScript](http://coffeescript.org/),
-[Stylus](http://learnboost.github.com/stylus/) and
-[Handlebars](http://handlebarsjs.com/).
-[Bootstrap 3](http://getbootstrap.com/).
 
 ## Getting started
 * Install node js and npm
@@ -18,6 +12,19 @@ Main features are [CoffeeScript](http://coffeescript.org/),
 * Launch the server and build brunch w --server
 * Open the `public/` dir to see the result.
 * Write your code in `app/`.
+
+## Features
+* Dashboard sensors visualization
+* By-room sensor visualization
+* Improved sensor UI with ProcessingJS
+
+## This application use Brunch with Marionette
+This is a simple coffeescript based skeleton for [Brunch](http://brunch.io/) which utilizes [MarionetteJS](http://marionettejs.com/) and Bootstrap 3.
+
+Main features are [CoffeeScript](http://coffeescript.org/),
+[Stylus](http://learnboost.github.com/stylus/) and
+[Handlebars](http://handlebarsjs.com/).
+[Bootstrap 3](http://getbootstrap.com/).
 
 ## Other
 Versions of software the skeleton uses:
