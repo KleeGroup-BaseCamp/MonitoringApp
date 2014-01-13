@@ -12,7 +12,7 @@ module.exports = RoomView = Backbone.Marionette.CompositeView.extend({
 	//itemViewContainer : 'div.sensors',
 	appendHtml: function(collectionView, itemView, index){
 		console.log(itemView.el);
-    collectionView.$("div.sensors.row").append(itemView.el);
+    	collectionView.$("div.sensors.row").append(itemView.el);
   },
 
 
