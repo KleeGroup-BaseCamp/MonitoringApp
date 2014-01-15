@@ -10,9 +10,6 @@ class Application extends Backbone.Marionette.Application
         pushState: true
         root: config.approot
 
-      # Freeze the object
-      Object.freeze? this
-
     @addInitializer (options) =>
       # All navigation that is relative should be passed through the navigate
       # method, to be processed by the router. If the link has a `data-bypass`
@@ -46,6 +43,18 @@ class Application extends Backbone.Marionette.Application
       # Instantiate the router
       Router = require 'lib/router'
       @router = new Router()
+
+    @addInitializer (options) =>
+      # Add an ajax prefilter
+      # to add user_id and api_key
+      application = this
+      $.ajaxPrefilter (options, originalOptions, jqXHR) ->
+        if application.user_id and application.api_key
+          login_data = {
+            user_id: application.user_id,
+            api_key: application.api_key
+          }
+          options.data = $.param($.extend(originalOptions.data, login_data))
 
     @start()
 
