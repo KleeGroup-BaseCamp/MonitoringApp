@@ -28,6 +28,9 @@
       },
       "main": "backbone.js"
     },
+    "processingjs": {
+      "main": "processing.js"
+    },
     "bootstrap": {
       "dependencies": {
         "jquery": "*"
