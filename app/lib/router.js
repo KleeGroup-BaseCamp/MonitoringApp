@@ -7,19 +7,27 @@ ChartJSSensorView = require('views/chartjs-sensor-view');
 SensorCollectionView = require('views/sensor-collectionview');
 RoomsCollectionView = require('views/rooms-collectionview');
 
+LoginView = require('/views/login-view')
+
 module.exports = Router = Backbone.Router.extend({
 
   routes : {
     '': 'dashboard',
     'stats' : 'stats',
     'dashboard': 'dashboard',
-    'rooms' : 'rooms'
+    'rooms' : 'rooms',
+    'login' : 'login'
   },
 
   stats: function(){
     $("#menu a").removeClass("active");
     $("#menu a#menu-stats").addClass("active");
     view = new ChartJSSensorView();
+    application.layout.content.show(view);
+  },
+
+  login: function(){
+    view = new LoginView();
     application.layout.content.show(view);
   },
 
