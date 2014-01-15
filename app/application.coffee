@@ -49,12 +49,20 @@ class Application extends Backbone.Marionette.Application
       # to add user_id and api_key
       application = this
       $.ajaxPrefilter (options, originalOptions, jqXHR) ->
+        original_error = originalOptions.error
+        new_error = (jqXHR, textStatus, errorThrown) ->
+          if jqXHR.status == 401
+            Backbone.history.navigate('/login', true)
+          else
+            original_error(jqXHR, textStatus, errorThrown)
+        options.error = new_error
         if application.user_id and application.api_key
           login_data = {
             user_id: application.user_id,
             api_key: application.api_key
           }
           options.data = $.param($.extend(originalOptions.data, login_data))
+        return
 
     @start()
 
