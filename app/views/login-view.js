@@ -24,6 +24,8 @@ module.exports = LoginView = Backbone.Marionette.ItemView.extend({
                 if(data.user_id && data.api_key){
                     application.user_id = data.user_id;
                     application.api_key = data.api_key;
+                    $.cookie('homeagainuid', data.user_id);
+                    $.cookie('homeagainak', data.api_key);
                     Backbone.history.navigate('/rooms', true);
                 }
             },

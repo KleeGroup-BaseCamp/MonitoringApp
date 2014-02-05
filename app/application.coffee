@@ -11,6 +11,13 @@ class Application extends Backbone.Marionette.Application
         root: config.approot
 
     @addInitializer (options) =>
+      user_id = $.cookie('homeagainuid')
+      api_key = $.cookie('homeagainak')
+      if (user_id && api_key)
+        this.user_id = user_id
+        this.api_key = api_key
+
+    @addInitializer (options) =>
       # All navigation that is relative should be passed through the navigate
       # method, to be processed by the router. If the link has a `data-bypass`
       # attribute, bypass the delegation completely.
