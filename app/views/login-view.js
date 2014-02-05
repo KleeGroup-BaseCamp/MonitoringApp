@@ -20,16 +20,22 @@ module.exports = LoginView = Backbone.Marionette.ItemView.extend({
                 username: username,
                 password: password
             }),
-            success: function(data){
-                if(data.user_id && data.api_key){
+            success: function(data) {
+                if (data.user_id && data.api_key) {
                     application.user_id = data.user_id;
                     application.api_key = data.api_key;
-                    $.cookie('homeagainuid', data.user_id);
-                    $.cookie('homeagainak', data.api_key);
+                    $.cookie('homeagainuid', data.user_id, {
+                        expires: 7,
+                        path: '/'
+                    });
+                    $.cookie('homeagainak', data.api_key, {
+                        expires: 7,
+                        path: '/'
+                    });
                     Backbone.history.navigate('/rooms', true);
                 }
             },
-            error: function(){
+            error: function() {
                 $('#loginForm #username').val('');
                 $('#loginForm #password').val('');
             },
