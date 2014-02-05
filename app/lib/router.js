@@ -11,55 +11,59 @@ LoginView = require('/views/login-view')
 
 module.exports = Router = Backbone.Router.extend({
 
-  routes : {
+  routes: {
     '': 'dashboard',
-    'stats' : 'stats',
+    'stats': 'stats',
     'dashboard': 'dashboard',
-    'rooms' : 'rooms',
-    'login' : 'login'
+    'rooms': 'rooms',
+    'login': 'login'
   },
 
-  stats: function(){
+  stats: function() {
     $("#menu a").removeClass("active");
     $("#menu a#menu-stats").addClass("active");
     view = new ChartJSSensorView();
     application.layout.content.show(view);
   },
 
-  login: function(){
+  login: function() {
     view = new LoginView();
     application.layout.content.show(view);
   },
 
-  rooms: function(){
+  rooms: function() {
     $("#menu a").removeClass("active");
     $("#menu a#menu-rooms").addClass("active");
     roomCollection = new RoomCollection();
-    
+
     roomCollection.fetch({
-      success : function(){
+      success: function() {
         console.log(roomCollection.models);
-        view = new RoomsCollectionView({collection : roomCollection});
+        view = new RoomsCollectionView({
+          collection: roomCollection
+        });
         application.layout.content.show(view);
         console.log(roomCollection.models);
       },
-      error : function(err){
+      error: function(err) {
         console.log(err);
       }
     });
   },
 
-  dashboard: function(){
+  dashboard: function() {
     $("#menu a").removeClass("active");
     $("#menu a#menu-dashboard").addClass("active");
     sensorCollection = new SensorCollection();
 
     sensorCollection.fetch({
-      success : function(){
-        view = new SensorCollectionView({collection : sensorCollection});
+      success: function() {
+        view = new SensorCollectionView({
+          collection: sensorCollection
+        });
         application.layout.content.show(view);
       },
-      error : function(err){
+      error: function(err) {
         console.log(err);
       }
     });

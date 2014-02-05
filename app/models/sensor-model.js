@@ -1,22 +1,24 @@
 module.exports = SensorModel = Backbone.Model.extend({
 	idAttribute: 'sensor_id',
-	defaults : {
-		data : {
-			value : 0
+	defaults: {
+		data: {
+			value: 0
 		}
 	},
-	initialize : function(){
-		
+	initialize: function() {
+
 		modelName = this.get('model');
 		modelName = modelName[0].toUpperCase() + modelName.slice(1);
 
 		this.set('name', modelName);
-		
-		if(!this.get('data')){
+
+		if (!this.get('data')) {
 			this.fetch();
 
 		}
 		var model = this;
-		window.setInterval(function(){ model.fetch()}, 10000);
+		window.setInterval(function() {
+			model.fetch()
+		}, 10000);
 	}
 });
