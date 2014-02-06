@@ -1,9 +1,7 @@
 module.exports = SensorModel = Backbone.Model.extend({
 	idAttribute: 'sensor_id',
 	defaults: {
-		data: {
-			value: 0
-		}
+		data: []
 	},
 	initialize: function() {
 
@@ -12,7 +10,7 @@ module.exports = SensorModel = Backbone.Model.extend({
 
 		this.set('name', modelName);
 
-		if (!this.get('data')) {
+		if (this.get('data').length == 0) {
 			this.fetch();
 
 		}

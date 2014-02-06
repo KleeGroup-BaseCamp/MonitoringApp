@@ -19,7 +19,11 @@ module.exports = class TemperatureView extends Backbone.Marionette.ItemView
             @p = new Processing(canvas, @sketchProc);
         @p.width = @$el.width()
        # console.log "Div width: " + @$el.find("div.col-lg-3").width()
-        @p.temperatureEnd= Math.round(@model.get("data").value)
+        console.log @model
+        if @model.get("data").length > 0
+            @p.temperatureEnd= Math.round(@model.get("data")[0].value)
+        else
+            @p.temperatureEnd= Math.round(0)
         
         
         #p.temperature = @model.get("value")
