@@ -10,13 +10,14 @@ module.exports = SensorModel = Backbone.Model.extend({
 
 		this.set('name', modelName);
 
-		if (this.get('data').length == 0) {
+		if (this.get('data').length === 0) {
 			this.fetch();
 
 		}
+		//Code problem: => Need a callback function.
 		var model = this;
 		window.setInterval(function() {
-			model.fetch()
+			model.fetch();//Strange...
 		}, 10000);
 	}
 });

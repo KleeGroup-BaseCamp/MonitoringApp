@@ -73,6 +73,9 @@ class Application extends Backbone.Marionette.Application
     @addInitializer (options) =>
       # Add an ajax prefilter
       # to add user_id and api_key
+      ###
+        todo: externalize into a function into lob..
+      ###
       application = this
       $.ajaxPrefilter (options, originalOptions, jqXHR) ->
         original_error = originalOptions.error
