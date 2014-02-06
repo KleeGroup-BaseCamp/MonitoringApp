@@ -19,7 +19,9 @@
     "jquery.cookie": "~1.4.0",
     "moment": "~2.2.1",
     "bootstrap-switch": "*",
-    "processingjs" : "*"
+    "processingjs": "*",
+    "i18next": "~1.7.1",
+    "backbone-validation": "~0.9.1"
   },
   "overrides": {
     "backbone": {
