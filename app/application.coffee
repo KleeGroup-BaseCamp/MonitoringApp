@@ -1,6 +1,25 @@
 require 'lib/view_helper'
 config = require 'config'
 
+addQSParm = (url, name, value) ->
+    re = new RegExp("([?&]" + name + "=)[^&]+", "")
+
+    add = (sep) ->
+        url += sep + name + "=" + encodeURIComponent(value)
+
+    change = () ->
+        url = url.replace(re, "$1" + encodeURIComponent(value))
+
+    if (url.indexOf("?") == -1)
+        add("?")
+    else
+        if (re.test(url))
+            change()
+        else
+            add("&")
+
+    return url
+
 class Application extends Backbone.Marionette.Application
 
   initialize: =>
@@ -64,11 +83,8 @@ class Application extends Backbone.Marionette.Application
             original_error(jqXHR, textStatus, errorThrown)
         options.error = new_error
         if application.user_id and application.api_key
-          login_data = {
-            user_id: application.user_id,
-            api_key: application.api_key
-          }
-          options.data = $.param($.extend(originalOptions.data, login_data))
+          options.url = addQSParm(options.url, 'user_id', application.user_id)
+          options.url = addQSParm(options.url, 'api_key', application.api_key)
         return
 
     @start()
