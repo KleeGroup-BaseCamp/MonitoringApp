@@ -1,11 +1,11 @@
 module.exports = SensorModel = Backbone.Model.extend({
-	idAttribute: 'sensor_id',
+	idAttribute: 'identifier',
 	defaults: {
 		data: []
 	},
 	initialize: function() {
 
-		modelName = this.get('model');
+		modelName = this.get('model').name;
 		modelName = modelName[0].toUpperCase() + modelName.slice(1);
 
 		this.set('name', modelName);
