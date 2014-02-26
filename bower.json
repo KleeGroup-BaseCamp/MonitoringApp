@@ -55,6 +55,9 @@
     },
     "underscore": {
       "main": "underscore.js"
+    },
+    "backbone-validation" : {
+        "main" : [ "backbone-validation-amd-min.js", "backbone-validation-min.js"]
     }
   },
   "resolutions": {
