@@ -7,6 +7,7 @@ module.exports = RoomView = Backbone.Marionette.CompositeView.extend({
 		if (sensor.get('model') == 'temperature') return TemperatureView;
 		if (sensor.get('model') == 'door') return DoorView;
 		if (sensor.get('model') == 'moisture') return MoistureView;
+		if (sensor.get('model') == 'presence') return PresenceView;
 
 	},
 	//itemViewContainer : 'div.sensors',
