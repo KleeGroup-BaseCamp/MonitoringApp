@@ -8,8 +8,9 @@ module.exports = SensorCollectionView = Backbone.Marionette.CollectionView.exten
     getItemView: function(sensor) {
 
         if (sensor.get('model')['name'] == 'temperature') return TemperatureView;
-        if (sensor.get('model')['name'] == 'door') return DoorView;
-        if (sensor.get('model')['name'] == 'moisture') return MoistureView;
+        else if (sensor.get('model')['name'] == 'door') return DoorView;
+        else if (sensor.get('model')['name'] == 'moisture') return MoistureView;
+        else if (sensor.get('model')['name'] == 'presence') return PresenceView;
 
         else return TemperatureView;
     }
