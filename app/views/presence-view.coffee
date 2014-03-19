@@ -18,8 +18,7 @@ module.exports = class PresenceView extends Backbone.Marionette.ItemView
             canvas = @$el.find(".canvas").get(0)
             @p = new Processing(canvas, @sketchProc);
         @p.width = @$el.width()
-       # console.log "Div width: " + @$el.find("div.col-lg-3").width()
-        console.log @model
+        
         if @model.get("data").length > 0
             @p.presence = @model.get("data")[0].value
 

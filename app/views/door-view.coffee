@@ -3,8 +3,18 @@ module.exports = class DoorView extends Backbone.Marionette.ItemView
   template: 'views/templates/door',
   
   initialize: ->
-    this.model.on('change', @render, @)
-
+    #this.model.on('change', @render, @)
+    this.model.on(
+            'change',
+            () -> 
+                if(!@p)
+                    @render
+                else
+                    @p.temperatureEnd = @p.status= @model.get("data")[0].value
+                    @p.loop()
+            ,
+            @
+        )
   events:
     'click #refresh' : 'refresh'
 
@@ -18,8 +28,7 @@ module.exports = class DoorView extends Backbone.Marionette.ItemView
       canvas = @$el.find(".canvas").get(0)
       @p = new Processing(canvas, @sketchProc)
     @p.width = @$el.width()
-    #console.log "Div width: " + @$el.find("div.col-lg-3").width()
-    console.log @model
+    
     if @model.get("data").length > 0
       @p.status= @model.get("data")[0].value
     else
@@ -43,6 +52,7 @@ module.exports = class DoorView extends Backbone.Marionette.ItemView
       p.size @width, @width
       
       @drawStatus(@status)
+      p.noLoop()
 
     p.drawStatus=(status) ->
       # Set background

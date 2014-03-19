@@ -8,13 +8,22 @@ module.exports = class TemperatureView extends Backbone.Marionette.ItemView
     template: 'views/templates/temperature',
     
     initialize: ->
-             this.model.on('change', @render, @)
+        this.model.on(
+            'change',
+            () -> 
+                if(!@p)
+                    @render
+                else
+                    @p.temperatureEnd = Math.round(@model.get("data")[0].value)
+                    @p.loop()
+            ,
+            @
+        )
 
     events: 
         'click #refresh' : 'refresh'
 
     refresh : ->
-        this.model.fetch()
 
     render : =>
         
@@ -23,8 +32,7 @@ module.exports = class TemperatureView extends Backbone.Marionette.ItemView
             canvas = @$el.find(".canvas").get(0)
             @p = new Processing(canvas, @sketchProc);
         @p.width = @$el.width()
-       # console.log "Div width: " + @$el.find("div.col-lg-3").width()
-        console.log @model
+       
         if @model.get("data").length > 0
             @p.temperatureEnd= Math.round(@model.get("data")[0].value)
         else
@@ -57,6 +65,8 @@ module.exports = class TemperatureView extends Backbone.Marionette.ItemView
                 @temperature += 1
               else if( @temperatureEnd < @temperature)
                 @temperature -= 1
+            else
+                p.noLoop()
               
             @drawArc(@temperature)  
             

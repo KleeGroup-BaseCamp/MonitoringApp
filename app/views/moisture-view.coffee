@@ -3,8 +3,17 @@ module.exports = class MoistureView extends Backbone.Marionette.ItemView
     template: 'views/templates/moisture'
     
     initialize: ->
-        this.model.on('change', @render, @)
-
+        this.model.on(
+            'change',
+            () -> 
+                if(!@p)
+                    @render
+                else
+                    @p.moistureEnd= Math.round(@model.get("data")[0].value)
+                    @p.loop()
+            ,
+            @
+        )
     events: 
         'click #refresh' : 'refresh'
 
@@ -18,7 +27,6 @@ module.exports = class MoistureView extends Backbone.Marionette.ItemView
             canvas = @$el.find(".canvas").get(0)
             @p = new Processing(canvas, @sketchProc);
 
-        console.log "coucou"
         if @model.get("data").length > 0
             @p.moistureEnd= Math.round(@model.get("data")[0].value)
         else 
